@@ -193,7 +193,7 @@ public class SopranoModel: Module, KVCacheDimensionProvider, SpeechGenerationMod
     @ModuleInfo(key: "lm_head") var lmHead: Linear?
 
     // Token IDs
-    private var stopTokenId: Int?
+    var stopTokenId: Int?
 
     // KVCacheDimensionProvider conformance
     public var numLayers: Int {
