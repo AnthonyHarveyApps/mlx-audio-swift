@@ -18,7 +18,7 @@ public struct PocketTTSState {
 
 public final class PocketTTSModel: Module, SpeechGenerationModel, @unchecked Sendable {
     public let config: PocketTTSModelConfig
-    private let modelFolder: URL
+    public let modelFolder: URL
     @ModuleInfo(key: "flow_lm") public var flow_lm: FlowLMModel
     @ModuleInfo(key: "mimi") public var mimi: MimiAdapter
     public var speaker_proj_weight: MLXArray
