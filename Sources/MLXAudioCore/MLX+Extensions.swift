@@ -89,7 +89,7 @@ extension MLXArray {
         let result: MLXArray
         switch dtype {
         case .float32: result = MLXArray.zeros(newShape, type: Float.self)
-        case .float16: result = MLXArray.zeros(newShape, type: Float16.self)
+        case .float16: result = MLXArray.zeros(newShape, type: Float.self).asType(.float16)
         case .int32: result = MLXArray.zeros(newShape, type: Int32.self)
         case .int64: result = MLXArray.zeros(newShape, type: Int64.self)
         case .bool: result = MLXArray.zeros(newShape, type: Bool.self)
@@ -99,7 +99,7 @@ extension MLXArray {
         case .uint64: result = MLXArray.zeros(newShape, type: UInt64.self)
         case .int8: result = MLXArray.zeros(newShape, type: Int8.self)
         case .int16: result = MLXArray.zeros(newShape, type: Int16.self)
-        case .bfloat16: result = MLXArray.zeros(newShape, type: Float16.self)
+        case .bfloat16: result = MLXArray.zeros(newShape, type: Float.self).asType(.bfloat16)
         case .complex64: result = MLXArray.zeros(newShape, type: Float64.self)
         case .float64: result = MLXArray.zeros(newShape, type: Float64.self)
         }
@@ -161,7 +161,7 @@ extension MLXArray {
             // Return empty array if range is invalid or empty
             switch dtype {
             case .float32: return MLXArray.zeros([0], type: Float.self)
-            case .float16: return MLXArray.zeros([0], type: Float16.self)
+            case .float16: return MLXArray.zeros([0], type: Float.self).asType(.float16)
             default: fatalError("Unsupported float dtype for empty arange: \(dtype)")
             }
         }
@@ -174,9 +174,9 @@ extension MLXArray {
         case .float32:
             let data = sequence.map { Float($0) }
             return MLXArray(data)
-        case .float16:
-            let data = sequence.map { Float16($0) }
-            return MLXArray(data)
+       case .float16:
+        let data = sequence.map { Float($0) }
+        return MLXArray(data).asType(.float16)
         default:
             fatalError("Unsupported float dtype for arange: \(dtype)")
         }
